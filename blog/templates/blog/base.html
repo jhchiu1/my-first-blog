@@ -8,12 +8,17 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-       <div class="page-header">
+        <div class="page-header">
         {% if user.is_authenticated %}
+        <!--Checks for authenticated users to show the add and edit buttons, otherwise login button shown-->
         <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        <h1><a href="/">Django Girls Blog</a></h1>
-        {% endif %}
-    </div>
+        <!--Shows 'Hello <username>' showing user logged in and authenticated. Adds logout link too-->
+        <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+    {% else %}
+        <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+    {% endif %}
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
     <div class="content container">
         <div class="row">
             <div class="col-md-8">
@@ -22,6 +27,5 @@
             </div>
         </div>
     </div>
-
     </body>
 </html>
